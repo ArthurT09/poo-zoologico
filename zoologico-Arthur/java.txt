@@ -1,0 +1,90 @@
+Classe docente
+
+package faculdade;
+
+import java.util.Scanner;
+
+public class Docente {
+    private String nome;
+    private String formacao;
+    private String cidade;
+
+    public void escreverDocente(){
+        System.out.println("Nome: " + nome);
+        System.out.println("Formação: " + formacao);
+        System.out.println("Cidade: " + cidade);
+    }
+
+   public Docente(String nome, String formacao, String cidade){
+        this.nome = nome;
+        this.formacao = formacao;
+        this.cidade = cidade;
+
+   }
+
+   public static Docente criarNovoDocente(){
+        Scanner scanner = new Scanner(System.in);
+       System.out.println("Informe os dados do docente: ");
+       System.out.println("Nome: ");
+       String nome = scanner.nextLine();
+
+       System.out.println("Formação: ");
+       String formacao = scanner.nextLine();
+
+       System.out.println("Cidade: ");
+       String cidade = scanner.nextLine();
+
+       return new Docente(nome, formacao, cidade);
+
+   }
+}
+
+
+
+Classe Programa
+
+package faculdade;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Scanner;
+
+public class Programa {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<Docente> docentes = new ArrayList<>();
+
+        for (int i = 0; i < 4; i++){
+            System.out.println("Cadastro de docente: " + (i + 1));
+            Docente novoDocente = Docente.criarNovoDocente();
+            docentes.add(novoDocente);
+        }
+
+        while (true){
+            System.out.println("Deseja Continuar? ");
+            System.out.println("1 - Sim");
+            System.out.println("2 - Não");
+
+            int opcao = scanner.nextInt();
+            scanner.nextLine(); //Limpa o buffer
+
+            switch (opcao){
+                case 1:
+                    Docente novoDocente = Docente.criarNovoDocente();
+                    docentes.add(novoDocente);
+                    break;
+
+                case 2:
+                    System.out.println("Encerrando sessão!");
+                    System.out.println("Lista de docentes: ");
+                    for (Docente docente : docentes){
+                        docente.escreverDocente();
+                        System.out.println();
+                    }
+                    System.exit(0);
+            }
+        }
+    }
+}
+
